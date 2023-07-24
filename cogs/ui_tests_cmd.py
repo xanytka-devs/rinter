@@ -47,11 +47,11 @@ class UITestsCMD(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="Элемент")
+    @commands.command(name="элемент")
     async def changeElement(self, ctx):
         await ctx.send("Выберите цвет вашего элемента:", view=DropdownView())
 
-    @commands.command(name="Играть")
+    @commands.command(name="играть")
     async def ask_play(self, ctx):
         view = Confirm()
         await ctx.send("Бро, го играть до 3:33?", view=view)

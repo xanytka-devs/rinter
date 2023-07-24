@@ -5,7 +5,7 @@ from disnake.ext import commands
 with open(os.path.dirname(os.path.realpath(__file__)) + '/token.txt') as file:
     TOKEN = file.readline().strip()
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("^"), help_command=None, intents=disnake.Intents.all(), test_guilds=[1026584709599338647])
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("*"), help_command=None, intents=disnake.Intents.all(), test_guilds=[1026584709599338647])
 
 @bot.command()
 @commands.is_owner()
