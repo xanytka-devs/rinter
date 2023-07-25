@@ -28,18 +28,5 @@ for filename in os.listdir("cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f"cogs.{filename[:-3]}")
         print(f"Расширение {filename[:-3]} было загружено.")
-        
-# Надо перенести в другой файл.
-@bot.command(name="отправитьВложение", brief="", usage="")
-@commands.has_permissions(administrator=True)
-async def send_embed(sendChannel = disnake.channel.__name__, *, msgTitle = "230", desc = "124"):
-    embed = disnake.Embed(color=bot.guild.me.color)
-    embed.title=msgTitle,
-    embed.description=desc
-    await sendChannel.send(embed=embed)
 
 bot.run(TOKEN)
-
-
-#@bot.slash_command()
-#async def
