@@ -31,6 +31,7 @@ for filename in os.listdir("cogs"):
 
 bot.run(TOKEN)
 
+# Надо перенести в другой файл.
 @bot.command(name="отправить_вложение", brief="", usage="")
 @commands.has_permissions(administrator=True)
 async def send_embed(sendChannel = disnake.channel.__name__, *, msgTitle = "230", desc = "124"):

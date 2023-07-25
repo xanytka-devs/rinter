@@ -19,18 +19,18 @@ class CMDBase(commands.Cog):
     async def on_command_error(self, ctx, error):
         print(error)
         if isinstance(error, commands.MissingPermissions):
-            await ctx.reply(f"**<@{ctx.member.id}>**, у вас не домтаточно прав для использование данной комманды.", ephemeral=True)
+            await ctx.message.reply(f"**<@{ctx.message.author.id}>**, у вас не доcтаточно прав для использование данной комманды.", delete_after=10.0)
         elif isinstance(error, commands.UserInputError):
-            await ctx.reply(f"Правильное использование команды '{ctx.prefix}{ctx.command.name}': ({ctx.command.brief})\nПример: {ctx.prefix}{ctx.command.usage}", ephemeral=True)
+            await ctx.message.reply(f"**<@{ctx.message.author.id}>**, правильное использование команды '\{ctx.prefix}{ctx.command.name}': ({ctx.command.brief})\nПример: \{ctx.prefix}{ctx.command.usage}", delete_after=10.0)
         elif isinstance(error, commands.CommandNotFound):
-            await ctx.reply(f"Команда '{ctx.prefix}{ctx.message.content}' не существует. Проверьте словарь.")
+            await ctx.message.reply(f"Команда '\{ctx.prefix}{ctx.message.content}' не существует.")
         elif isinstance(error, commands.DisabledCommand):
-            await ctx.reply(f"Команда '{ctx.prefix}{ctx.command.name}' не доступна.")
+            await ctx.message.reply(f"Команда '\{ctx.prefix}{ctx.command.name}' не доступна.")
         elif isinstance(error, commands.TooManyArguments):
-            await ctx.reply(f"Ваша команда '{ctx.prefix}{ctx.command.name}' имеет слишком много аргументов."
-                           + f"Правильное использование данной команды: ({ctx.command.brief})\nПример: {ctx.prefix}{ctx.command.usage}", ephemeral=True)
+            await ctx.message.reply(f"**<@{ctx.message.author.id}>**, ваша команда '\{ctx.prefix}{ctx.command.name}' имеет слишком много аргументов."
+                           + f"Правильное использование данной команды: ({ctx.command.brief})\nПример: \{ctx.prefix}{ctx.command.usage}", delete_after=10.0)
         elif isinstance(error, commands.TooManyArguments):
-            await ctx.reply(f"Команда '{ctx.prefix}{ctx.command.name}' имеет ограничение в частоте использования.", ephemeral=True)
+            await ctx.message.reply(f"**<@{ctx.message.author.id}>**, команда '\{ctx.prefix}{ctx.command.name}' имеет ограничение в частоте использования.", delete_after=10.0)
     
     @commands.slash_command(name="данные", description="Выдаёт текущие данные о боте.")
     async def info(self, ctx):

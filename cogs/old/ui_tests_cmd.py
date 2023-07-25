@@ -2,6 +2,8 @@ from typing import Optional
 import disnake
 from disnake.ext import commands
 
+# Данное расширение не будет загружаться по стандарту.
+#   Для тестов перенесите в основную папку cogs.
 class Confirm(disnake.ui.View):
     def __init__(self):
         super().__init__(timeout=10.0)
