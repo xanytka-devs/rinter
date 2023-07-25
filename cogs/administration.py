@@ -11,6 +11,8 @@ class AdministrationCMD(commands.Cog):
         embed = disnake.Embed(color=ctx.guild.me.color)
         embed.title=title
         embed.description=description
+        embed.footer.text=ctx.author.name
+        embed.footer.icon_url=ctx.author.avatar
         await ctx.send(embed=embed)
 
 def setup(bot):
