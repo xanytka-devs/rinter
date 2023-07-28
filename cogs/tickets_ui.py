@@ -3,7 +3,7 @@ from disnake.ext import commands
 
 class TicketInteractionUI(disnake.ui.View):
     def __init__(self):
-        super().__init__()
+        super().__init__(timeout=None)
     
     @disnake.ui.button(label="Создать тикет", style=disnake.ButtonStyle.green, emoji="📩")
     async def confirm(self, button: disnake.ui.Button, inter: disnake.CommandInteraction):
