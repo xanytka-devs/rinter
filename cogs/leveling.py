@@ -2,9 +2,8 @@ from __future__ import annotations
 import math
 import time
 from dataclasses import dataclass
-from typing import Iterable, TYPE_CHECKING, List
 
-import database
+#import database
 import disnake
 from disnake.ext import commands
 
