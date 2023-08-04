@@ -14,7 +14,7 @@ class Manager:
                     continue
                 if line == "only=(":
                     isWhitelist = True
-                loadItems.append(line.strip())
+                loadItems.append(line.strip(',').strip())
         # Load cogs.
         loadedExt = False
         for filename in os.listdir("cogs"):
