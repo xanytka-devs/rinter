@@ -2,7 +2,7 @@ import os
 import disnake
 from disnake.ext import commands
 import cogs_manager
-from cogs.tickets_ui import TicketInteractionUI
+from cogs.tickets_ui import TicketCreationUI, TicketInteractionUI, TicketCloseUI, TicketAdminInteractionUI
 
 with open(os.path.dirname(os.path.realpath(__file__)) + '/token.txt') as file:
     TOKEN = file.readline().strip()
@@ -21,7 +21,10 @@ class BaseBot(commands.Bot):
 
     async def on_ready(self):
         if not self.persistent_views_added:
+            self.add_view(TicketCreationUI())
             self.add_view(TicketInteractionUI())
+            self.add_view(TicketCloseUI())
+            self.add_view(TicketAdminInteractionUI())
             self.persistent_views_added = True
 
 bot = BaseBot()
