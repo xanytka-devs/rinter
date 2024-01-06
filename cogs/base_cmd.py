@@ -3,7 +3,6 @@ import disnake
 from disnake.ext import commands
 
 class CMDBase(commands.Cog):
-
     launched_at = None
 
     def __init__(self, bot):
@@ -14,23 +13,6 @@ class CMDBase(commands.Cog):
         if self.launched_at is None:
             self.launched_at = datetime.utcnow()
         print(f"Ботяра {self.bot.user} готов к р&р!")
-    
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        print(error)
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.channel.send_message(f"**<@{ctx.message.author.id}>**, у вас не доcтаточно прав для использование данной комманды.", ephemeral=True)
-        elif isinstance(error, commands.UserInputError):
-            await ctx.channel.send_message(f"**<@{ctx.message.author.id}>**, правильное использование команды '\{ctx.prefix}{ctx.command.name}': ({ctx.command.brief})\nПример: \{ctx.prefix}{ctx.command.usage}", ephemeral=True)
-        elif isinstance(error, commands.CommandNotFound):
-            await ctx.channel.send_message(f"Команда '\{ctx.prefix}{ctx.message.content}' не существует.", ephemeral=True)
-        elif isinstance(error, commands.DisabledCommand):
-            await ctx.channel.send_message(f"Команда '\{ctx.prefix}{ctx.command.name}' не доступна.", ephemeral=True)
-        elif isinstance(error, commands.TooManyArguments):
-            await ctx.channel.send_message(f"**<@{ctx.message.author.id}>**, ваша команда '\{ctx.prefix}{ctx.command.name}' имеет слишком много аргументов."
-                           + f"Правильное использование данной команды: ({ctx.command.brief})\nПример: \{ctx.prefix}{ctx.command.usage}", ephemeral=True)
-        elif isinstance(error, commands.TooManyArguments):
-            await ctx.channel.send_message(f"**<@{ctx.message.author.id}>**, команда '\{ctx.prefix}{ctx.command.name}' имеет ограничение в частоте использования.", ephemeral=True)
     
     @commands.slash_command(name="данные", description="Выдаёт текущие данные о боте.")
     async def info(self, ctx):

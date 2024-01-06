@@ -2,8 +2,6 @@ from datetime import datetime
 import disnake
 from disnake.ext import commands
 
-ticketCategory = "1137130340830416917"
-
 class TicketInteractionUI(disnake.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
@@ -71,8 +69,13 @@ class TicketCloseUI(disnake.ui.View):
         self.stop()
 
 class TicketCreationUI(disnake.ui.View):
-    def __init__(self):
+    _category=None
+    def __init__(self, categ):
         super().__init__(timeout=None)
+        if categ is not None:
+            self._category=categ
+        else:
+            self._category
 
     @disnake.ui.button(label="Создать тикет", style=disnake.ButtonStyle.green, emoji="📩", custom_id="ticket_interaction:create")
     async def confirm(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
@@ -82,7 +85,12 @@ class TicketCreationUI(disnake.ui.View):
             inter.guild.me: disnake.PermissionOverwrite(view_channel=True),
             inter.author: disnake.PermissionOverwrite(view_channel=True)
         }
-        channel = await inter.guild.create_text_channel(chName, category=inter.guild.get_channel(ticketCategory),
+        category = None
+        if self._category is not None:
+            for i in inter.guild.categories:
+                if i.id == int(self._category):
+                    category = i
+        channel = await inter.guild.create_text_channel(chName, category=category,
                                                         overwrites=overwrites, topic=inter.author.id)
         spEmb = disnake.Embed(color=int(hex(int('0x388E3C',16)),0))
         spEmb.title="Поддержка скоро прибудет"
@@ -96,11 +104,11 @@ class TicketsUICMD(commands.Cog):
 
     @commands.has_permissions(administrator=True)
     @commands.command(name="новоеТаблоТикетов", description="Создаёт новое табло тикетов.")
-    async def новоеТаблоТикетов(self, ctx, name="Новое табло тикетов", desc="Для создания обращения нажмите на 📩"):
+    async def новоеТаблоТикетов(self, ctx, name="Новое табло тикетов", desc="Для создания обращения нажмите на 📩", categ=None):
         embed = disnake.Embed(color=int(hex(int('0x388E3C',16)),0))
         embed.title = name
         embed.description = desc
-        await ctx.send(embed=embed, view=TicketCreationUI())
+        await ctx.send(embed=embed, view=TicketCreationUI(categ))
 
 
 def setup(bot):

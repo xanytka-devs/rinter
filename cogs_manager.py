@@ -8,7 +8,7 @@ class Manager:
         # Check for ignored cogs.
         isWhitelist = False
         loadItems = []
-        with open(os.path.dirname(os.path.realpath(__file__)) + '/token.txt', 'r') as file:
+        with open(os.path.dirname(os.path.realpath(__file__)) + '\cogs_load.conf', 'r') as file:
             for line in file:
                 if line.startswith('#') or line == '\n' or line == '\n'or line == ')':
                     continue
